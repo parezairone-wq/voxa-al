@@ -313,7 +313,7 @@ footer b{color:#fff}
       <div class="direct">
         <a class="btn white" href="tel:+33684419652">Appeler : 06 84 41 96 52</a>
         <a class="btn" href="sms:+33684419652">Envoyer un SMS</a>
-        <a class="btn" href="mailto:parezairone@gmail.com?subject=D%C3%A9mo%20agent%20vocal">parezairone@gmail.com</a>
+        <a class="btn" href="mailto:voxa.al.contact@gmail.com?subject=D%C3%A9mo%20agent%20vocal">voxa.al.contact@gmail.com</a>
         <small>Réponse le jour même · Tourcoing, Roubaix, Lille et alentours</small>
       </div>
     </div>
@@ -408,9 +408,9 @@ footer b{color:#fff}
     const txt = `Bonjour Airone, je suis ${v('nom') || '-'} du restaurant ${v('resto') || '-'}. Intéressé par : ${v('besoin')}. Joignable ${v('quand').toLowerCase()} au ${v('tel') || '-'}. ${v('msg')}`;
     const esc = x => x.replace(/[<>&]/g, c => ({'<': '&lt;', '>': '&gt;', '&': '&amp;'}[c]));
     const sms = 'sms:+33684419652?&body=' + encodeURIComponent(txt);
-    const mail = 'mailto:parezairone@gmail.com?subject=' + encodeURIComponent('Démo agent vocal') + '&body=' + encodeURIComponent(txt);
+    const mail = 'mailto:voxa.al.contact@gmail.com?subject=' + encodeURIComponent('Démo agent vocal') + '&body=' + encodeURIComponent(txt);
     done.style.display = 'block';
-    done.innerHTML = `Dernière étape : envoyez ce message par SMS au <b>06 84 41 96 52</b> ou par mail à <b>parezairone@gmail.com</b>.<br><br>${esc(txt)}<br><br><a class="btn red" href="${sms}" style="min-height:44px">Envoyer par SMS</a> <a class="btn" href="${mail}" style="min-height:44px">Par mail</a> <button type="button" class="btn" id="cp" style="min-height:44px">Copier</button>`;
+    done.innerHTML = `Dernière étape : envoyez ce message par SMS au <b>06 84 41 96 52</b> ou par mail à <b>voxa.al.contact@gmail.com</b>.<br><br>${esc(txt)}<br><br><a class="btn red" href="${sms}" style="min-height:44px">Envoyer par SMS</a> <a class="btn" href="${mail}" style="min-height:44px">Par mail</a> <button type="button" class="btn" id="cp" style="min-height:44px">Copier</button>`;
     $('cp').addEventListener('click', async ev => {
       try { await navigator.clipboard.writeText(txt); ev.target.textContent = 'Copié'; }
       catch (err) { ev.target.textContent = 'Sélectionnez le texte'; }
