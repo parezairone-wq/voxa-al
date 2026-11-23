@@ -99,7 +99,15 @@ input[type=range]{width:100%;accent-color:#e3381f;height:32px}
 .offer-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px}
 .count{background:var(--yel);color:#1d1210;border-radius:14px;padding:10px 16px;font-weight:700}
 .count b{font-size:22px;font-weight:900}
-.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:28px}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:32px;align-items:stretch}
+.tag{font-size:15px;opacity:.8;margin-top:-6px}
+.then{font-size:15px;font-weight:700}
+.feats{list-style:none;padding:0!important;margin:6px 0 8px!important;display:grid;gap:8px}
+.feats li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px;align-items:start;margin:0!important;font-size:15px;line-height:1.4}
+.ck{width:16px;height:16px;margin-top:2px;color:#e3381f}
+.plan:not(.best) .ck{color:var(--yel)}
+.plan.best{transform:translateY(-8px)}
+@media(max-width:960px){.plans{grid-template-columns:minmax(0,1fr)}.plan.best{transform:none}}
 .plan{border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);position:relative}
 .plan.best{background:#fff;color:#1d1210;border:4px solid var(--yel)}
 .badge{position:absolute;top:-14px;left:22px;background:var(--yel);color:#1d1210;font-weight:900;font-size:13px;padding:5px 12px;border-radius:999px}
@@ -138,7 +146,7 @@ footer b{color:#fff}
 </head>
 <body>
 
-<div class="top">Offre de lancement : installation à 99 € au lieu de 249 €, jusqu'au 18 décembre. <a href="#offre">Voir l'offre</a></div>
+<div class="top">Offre de lancement : installation offerte et 3 premiers mois à prix réduit, jusqu'au 18 décembre. <a href="#offre">Voir les formules</a></div>
 
 <nav aria-label="Navigation principale">
   <div class="wrap">
@@ -161,7 +169,7 @@ footer b{color:#fff}
     <div>
       <h1>Votre restaurant répond à chaque appel, même en plein coup de feu.</h1>
       <p class="lead">Un agent vocal IA décroche à votre place : il prend les réservations, donne vos horaires et répond aux questions de vos clients, 7j/7. Vous restez en cuisine ou en salle.</p>
-      <div class="promo">Dès <b>89 €/mois</b> <span>· installation <s>249 €</s> <b>99 €</b></span></div>
+      <div class="promo">Dès <b>89 €/mois</b> <span>· installation <b>offerte</b> pour les 5 premiers restaurants</span></div>
       <div class="ctas">
         <a class="btn white" href="#contact">Je veux ma démo gratuite</a>
         <a class="btn" href="#calcul">Combien je perds ?</a>
@@ -241,42 +249,44 @@ footer b{color:#fff}
 <section class="band dark" id="offre">
   <div class="wrap">
     <div class="offer-head">
-      <h2>Offre de lancement, réservée aux 5 premiers restaurants.</h2>
+      <h2>Trois formules. Offre de lancement pour les 5 premiers restaurants.</h2>
       <div class="count">Fin de l'offre dans <b id="days">quelques</b> jours</div>
     </div>
     <div class="plans">
+      <div class="plan">
+        <h3>Essentiel</h3>
+        <p class="tag">Pour ne plus rater aucun appel</p>
+        <p class="price">199 € <small>les 3 premiers mois</small></p>
+        <p class="was"><b>Installation offerte</b> · au lieu de 416 €</p>
+        <p class="then">Puis 89 €/mois, sans engagement</p>
+        <ul class="feats"><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Répond 24h/24 et 7j/7, même pendant le service</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Horaires, adresse, parking, carte et plats du jour</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Prend les messages : nom, numéro et motif</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Résumé de chaque appel envoyé par mail</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>200 minutes</b> d’appels par mois</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Modifications de carte et d’horaires incluses</span></li></ul>
+        <a class="btn white" href="#contact" data-plan="Essentiel">Je choisis Essentiel</a>
+      </div>
       <div class="plan best">
-        <span class="badge">Le plus avantageux</span>
-        <h3>Pack 3 mois</h3>
-        <p class="price">249 € <small>une seule fois</small></p>
-        <p class="was">Au lieu de 606 € (installation + 3 mois)</p>
-        <ul>
-          <li><b>Installation offerte</b></li>
-          <li>3 mois d'agent vocal, 300 minutes d'appels par mois</li>
-          <li><b>1 vidéo courte offerte</b> pour vos réseaux</li>
-          <li>Modifications de carte et d'horaires incluses</li>
-        </ul>
-        <a class="btn red" href="#contact" data-plan="Pack 3 mois">Je réserve ma place</a>
+        <span class="badge">Le plus choisi</span>
+        <h3>Pro</h3>
+        <p class="tag">Pour remplir la salle</p>
+        <p class="price">329 € <small>les 3 premiers mois</small></p>
+        <p class="was"><b>Installation offerte</b> · au lieu de 666 €</p>
+        <p class="then">Puis 139 €/mois, sans engagement</p>
+        <ul class="feats"><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Tout Essentiel</b>, plus :</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Prise de réservation complète : jour, heure, couverts, nom, téléphone</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cahier de réservations Google Sheets, rempli en direct</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Alerte SMS à chaque nouvelle réservation</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Groupes, annulations et modifications triés pour vous</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Transfert de l’appel vers vous en cas d’urgence</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>400 minutes</b> d’appels par mois</span></li></ul>
+        <a class="btn red" href="#contact" data-plan="Pro">Je choisis Pro</a>
       </div>
       <div class="plan">
-        <h3>Mensuel</h3>
-        <p class="price">89 € <small>/mois</small></p>
-        <p class="was">Installation 99 € au lieu de 249 €</p>
-        <ul>
-          <li>Agent vocal, 300 minutes d'appels par mois</li>
-          <li>Résumés des appels par SMS ou mail</li>
-          <li>Modifications de carte et d'horaires incluses</li>
-          <li>Sans engagement, arrêt quand vous voulez</li>
-        </ul>
-        <a class="btn white" href="#contact" data-plan="Mensuel">Je choisis le mensuel</a>
+        <h3>Premium</h3>
+        <p class="tag">Tout compris, zéro souci</p>
+        <p class="price">479 € <small>les 3 premiers mois</small></p>
+        <p class="was"><b>Installation offerte</b> · au lieu de 946 €</p>
+        <p class="then">Puis 199 €/mois, sans engagement</p>
+        <ul class="feats"><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Tout Pro</b>, plus :</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>SMS de confirmation envoyé à votre client</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Agent multilingue : français, anglais, néerlandais</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Bilan mensuel : appels, réservations, heures de pointe</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Voix choisie avec vous, à l’image du restaurant</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Modifications prioritaires sous 24 h</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>800 minutes</b> d’appels par mois</span></li></ul>
+        <a class="btn white" href="#contact" data-plan="Premium">Je choisis Premium</a>
       </div>
     </div>
     <div class="guar">
       <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 4l20 8v14c0 13-9 22-20 26C17 48 8 39 8 26V12z" fill="#ffd23f"/><path d="M19 28l6 6 12-13" stroke="#1d1210" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <p><b>Satisfait ou remboursé pendant 14 jours.</b> Si l'agent ne vous convient pas, je vous rembourse l'installation ou le pack. Vous ne prenez aucun risque.</p>
+      <p><b>Satisfait ou remboursé pendant 14 jours.</b> Si l'agent ne vous convient pas, je vous rembourse intégralement. Vous ne prenez aucun risque.</p>
     </div>
-    <p class="after">Après la période de lancement, l'abonnement passe à 119 €/mois. Au-delà de 300 minutes : 0,25 € la minute. TVA non applicable, art. 293 B du CGI.</p>
-    <div class="extra"><span><b>Vidéos pour vos réseaux</b> : pack de 3 vidéos courtes tournées et montées sur place, 99 € au lieu de 149 €.</span><a class="btn" href="#contact" data-plan="Pack vidéos">En parler</a></div>
+    <p class="after">Offre de lancement : les 3 premiers mois sont payés en une fois, installation offerte. Hors offre, installation 149 € (Essentiel), 249 € (Pro) ou 349 € (Premium). Minutes supplémentaires : 0,25 € la minute. TVA non applicable, art. 293 B du CGI.</p>
   </div>
 </section>
 
@@ -287,8 +297,9 @@ footer b{color:#fff}
       <details open><summary>Est-ce que je garde mon numéro de téléphone ?</summary><p>Oui. Vos appels sont simplement renvoyés vers l'agent, aux moments que vous choisissez. Vos clients composent toujours le même numéro.</p></details>
       <details><summary>Mes clients sauront-ils qu'ils parlent à une IA ?</summary><p>Oui, l'agent se présente comme l'assistant vocal du restaurant. C'est plus honnête, et vos clients obtiennent leur réponse tout de suite au lieu de tomber dans le vide.</p></details>
       <details><summary>Que se passe-t-il si l'agent ne sait pas répondre ?</summary><p>Il prend les coordonnées du client et vous envoie un résumé de la demande pour que vous puissiez rappeler.</p></details>
-      <details><summary>Et si je dépasse les 300 minutes ?</summary><p>Chaque minute en plus est facturée 0,25 €. Pour un appel de réservation d'environ une minute, 300 minutes couvrent déjà beaucoup d'appels.</p></details>
-      <details><summary>Je peux arrêter quand je veux ?</summary><p>Oui. La formule mensuelle est sans engagement. Et pendant les 14 premiers jours, vous êtes remboursé si l'agent ne vous convient pas.</p></details>
+      <details><summary>Quelle formule choisir ?</summary><p>Essentiel si vous voulez surtout que quelqu'un réponde et prenne les messages. Pro si vous prenez des réservations par téléphone : c'est la formule la plus choisie. Premium si vous recevez beaucoup de touristes ou de clients belges, et si vous voulez des SMS de confirmation et un bilan chaque mois.</p></details>
+      <details><summary>Et si je dépasse mes minutes ?</summary><p>Chaque minute en plus est facturée 0,25 €. Un appel de réservation dure environ une minute : 400 minutes, c'est déjà plusieurs centaines d'appels.</p></details>
+      <details><summary>Je peux arrêter quand je veux ?</summary><p>Oui. Après les 3 premiers mois de l'offre de lancement, chaque formule est sans engagement et s'arrête quand vous voulez. Et pendant les 14 premiers jours, vous êtes remboursé si l'agent ne vous convient pas.</p></details>
       <details><summary>Qui êtes-vous ?</summary><p>Je m'appelle Airone, je suis basé à Tourcoing. Je crée et je gère moi-même chaque agent, et je me déplace dans toute la métropole lilloise. Vous avez un interlocuteur direct, pas un centre d'appels.</p></details>
     </div>
   </div>
@@ -318,9 +329,9 @@ footer b{color:#fff}
       </div>
       <label for="besoin">Ce qui vous intéresse
         <select id="besoin" name="besoin">
-          <option>Pack 3 mois</option>
-          <option>Mensuel</option>
-          <option>Pack vidéos</option>
+          <option>Pro</option>
+          <option>Essentiel</option>
+          <option>Premium</option>
           <option>Juste une démo</option>
         </select>
       </label>
