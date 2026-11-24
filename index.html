@@ -7,297 +7,381 @@
 <meta name="description" content="Voxa AL : un agent vocal IA qui répond au téléphone de votre restaurant pendant le service. Tourcoing, Lille, Roubaix.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
 <style>
-/* VOICE occasion: a confident local service, warm, direct, built to get a yes today
-   IDEA the restaurant's phone line at 20h, answered live: a call transcript and an order ticket
-   PICTURE a live call card with a voice waveform; below, a calculator of money lost to missed calls
-   COLOUR tomato red field, white, near-black ink, sky blue for the voice, yellow for the launch offer
-   TYPE Archivo 900 for titles + Archivo for text
-   LAYOUT laptop: title and offer left over red, call card right; phone: title, card, buttons */
-:root{color-scheme:light dark;--bg:light-dark(#ffffff,#140c0a);--ink:light-dark(#1d1210,#f6eeea);--soft:light-dark(#5b4b47,#c9b8b2);--red:light-dark(#e3381f,#c92f19);--blue:light-dark(#1f8fd6,#5cc8ff);--yel:#ffd23f;--panel:light-dark(#fff6f3,#22140f);--line:light-dark(#eddcd6,#3a2620)}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+/* IDEA un vendredi soir en plein service : le téléphone sonne, l'agent décroche.
+   MEMORABLE la soirée qui défile au scroll : l'horloge avance de 19h à 23h et les appels arrivent un par un.
+   COLOUR nuit #1b1030, tomate #e8401f, papier #fff, soleil #ffd23f, voix #45b6ff
+   TYPE Bricolage Grotesque, une seule famille, grosses tailles serrées pour les titres */
+:root{--night:#1b1030;--night2:#2a1a47;--tomato:#e8401f;--paper:#fff;--sun:#ffd23f;--voice:#45b6ff;--mist:#cfc4e3;--ink:#1b1030}
 *{box-sizing:border-box;min-width:0}
-html{scroll-padding-top:72px;scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Archivo,system-ui,sans-serif;overflow-x:clip}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--night);color:var(--paper);font:17px/1.55 "Bricolage Grotesque",system-ui,sans-serif;overflow-x:clip}
 a{color:inherit}
-.wrap{max-width:1240px;margin:0 auto}
-.band{padding:clamp(36px,5vw,80px) max(5vw,16px)}
-h1,h2,h3{font-weight:900;letter-spacing:-.02em;line-height:1.05;text-wrap:balance;margin:0}
-h1{font-size:clamp(34px,5vw,56px)}
-h2{font-size:clamp(28px,3.6vw,44px)}
-h3{font-size:20px;font-weight:800}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.035em;line-height:.95;text-wrap:balance}
+h2{font-size:clamp(38px,6.5vw,84px)}
+h3{font-size:22px;letter-spacing:-.02em;line-height:1.1}
 p{margin:0}
-.lead{font-size:18px;max-width:34em}
-.top{background:var(--yel);color:#1d1210;text-align:center;font-weight:700;font-size:15px;padding:8px 16px}
-.top a{font-weight:900}
-nav{position:sticky;top:0;z-index:5;background:var(--red);color:#fff;padding:10px max(5vw,16px)}
-nav .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between}
-.logo{font-weight:900;font-size:22px;letter-spacing:-.03em;text-decoration:none;display:flex;align-items:center;gap:8px}
-.logo svg{width:28px;height:28px}
-.links{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center}
-.links a{text-decoration:none;font-weight:500;padding:6px 0}
-.links a:hover{text-decoration:underline}
-.links .navcta{background:#fff;color:#1d1210;border-radius:999px;padding:8px 16px;font-weight:800}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 24px;border-radius:999px;text-decoration:none;border:2px solid currentColor;cursor:pointer;font:inherit;font-weight:800;font-size:16px;text-align:center}
-.btn.white{background:#fff;color:#1d1210;border-color:#fff}
-.btn.ink{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.btn.red{background:#e3381f;color:#fff;border-color:#e3381f}
-.btn:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
-.hero{background:var(--red);color:#fff}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,64px);align-items:center}
-.hero .lead{margin:18px 0 22px}
-.promo{display:inline-flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;background:var(--yel);color:#1d1210;border-radius:14px;padding:10px 16px;margin-bottom:22px;font-weight:700}
-.promo b{font-size:22px;font-weight:900}
-.promo s{opacity:.6}
-.ctas{display:flex;flex-wrap:wrap;gap:12px}
-.trust{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:20px;font-size:14px;font-weight:600}
-.trust span::before{content:"✓ ";font-weight:900}
-.call{background:#fff;color:#1d1210;border-radius:22px;padding:20px;box-shadow:0 18px 0 -6px rgba(0,0,0,.18)}
-.call-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid #f0e2dd}
-.who{display:flex;gap:12px;align-items:center}
-.dot{width:42px;height:42px;border-radius:50%;background:#1d1210;display:grid;place-items:center;flex:none}
-.dot svg{width:22px;height:22px}
-.who b{display:block}
-.who span{font-size:13px;color:#6b5a55}
-.live{font-size:13px;font-weight:800;color:#c92f19;white-space:nowrap;display:flex;align-items:center;gap:6px}
-.live i{width:9px;height:9px;border-radius:50%;background:#e3381f;display:inline-block}
-.wave{height:52px;margin:14px 0 6px}
-.wave svg{width:100%;height:100%;display:block}
-.msgs{display:grid;gap:10px;margin-top:8px}
-.m{max-width:88%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.4}
-.m.c{background:#f3ece9;justify-self:start;border-bottom-left-radius:4px}
-.m.a{background:#1d1210;color:#fff;justify-self:end;border-bottom-right-radius:4px}
-.m small{display:block;font-size:13px;opacity:.65;margin-bottom:2px}
-.ticket{margin-top:14px;border:2px dashed #e3381f;border-radius:12px;padding:10px 14px;font-size:14px;display:flex;flex-wrap:wrap;gap:4px 14px}
-.ticket b{color:#c92f19}
-.sample{font-size:13px;margin-top:12px;color:#6b5a55}
-.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start}
-.calc{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,28px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:28px}
-.field{display:grid;gap:6px;margin-bottom:14px}
-.field label{font-weight:700;font-size:15px;display:flex;justify-content:space-between;gap:10px}
-.field output{font-weight:900;white-space:nowrap;color:var(--red)}
-input[type=range]{width:100%;accent-color:#e3381f;height:32px}
-.result{background:#1d1210;color:#fff;border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:10px}
-.result .big{font-size:clamp(40px,6vw,64px);font-weight:900;letter-spacing:-.03em;line-height:1;white-space:nowrap}
-.result .vs{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:15px}
-.result .vs b{color:var(--yel)}
-.bar{height:14px;border-radius:7px;background:rgba(255,255,255,.15);overflow:hidden}
-.bar i{display:block;height:100%;background:var(--yel);border-radius:7px}
-.note{font-size:13px;color:var(--soft);margin-top:10px}
-.list{display:grid;gap:14px;margin:0;padding:0;list-style:none}
-.list li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;align-items:start;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
-.ic{width:40px;height:40px;border-radius:12px;background:var(--red);display:grid;place-items:center}
-.ic svg{width:22px;height:22px}
-.list b{display:block;font-size:17px}
-.list span{color:var(--soft);font-size:15px}
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:32px}
-.step{border-top:6px solid var(--red);padding-top:18px}
-.step p{margin-top:8px;color:var(--soft)}
-.step .when{display:inline-block;margin-top:12px;font-weight:800;font-size:14px;color:var(--red);white-space:nowrap}
-.dark{background:#1d1210;color:#f6eeea}
-.offer-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px}
-.count{background:var(--yel);color:#1d1210;border-radius:14px;padding:10px 16px;font-weight:700}
-.count b{font-size:22px;font-weight:900}
-.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:32px;align-items:stretch}
-.tag{font-size:15px;opacity:.8;margin-top:-6px}
-.then{font-size:15px;font-weight:700}
-.feats{list-style:none;padding:0!important;margin:6px 0 8px!important;display:grid;gap:8px}
-.feats li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px;align-items:start;margin:0!important;font-size:15px;line-height:1.4}
-.ck{width:16px;height:16px;margin-top:2px;color:#e3381f}
-.plan:not(.best) .ck{color:var(--yel)}
-.plan.best{transform:translateY(-8px)}
-@media(max-width:960px){.plans{grid-template-columns:minmax(0,1fr)}.plan.best{transform:none}}
-.plan{border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);position:relative}
-.plan.best{background:#fff;color:#1d1210;border:4px solid var(--yel)}
-.badge{position:absolute;top:-14px;left:22px;background:var(--yel);color:#1d1210;font-weight:900;font-size:13px;padding:5px 12px;border-radius:999px}
-.price{font-size:clamp(34px,4vw,46px);font-weight:900;letter-spacing:-.03em;line-height:1}
-.price small{font-size:16px;font-weight:700;letter-spacing:0}
-.was{font-size:15px;opacity:.75}
-.plan ul{margin:0;padding-left:20px}
-.plan li{margin:5px 0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 max(5vw,18px)}
+.band{padding:clamp(70px,11vw,150px) 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:999px;font:inherit;font-weight:700;font-size:17px;text-decoration:none;border:2px solid currentColor;cursor:pointer;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.sun{background:var(--sun);color:var(--ink);border-color:var(--sun)}
+.btn.tomato{background:var(--tomato);color:#fff;border-color:var(--tomato)}
+.btn.paper{background:#fff;color:var(--ink);border-color:#fff}
+:focus-visible{outline:3px solid var(--voice);outline-offset:3px}
+
+/* barre d'offre + nav */
+.top{background:var(--sun);color:var(--ink);text-align:center;font-weight:700;font-size:15px;padding:9px 16px}
+nav{position:sticky;top:0;z-index:20;background:rgba(27,16,48,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.logo{font-weight:800;font-size:24px;letter-spacing:-.04em;text-decoration:none;display:flex;align-items:center;gap:9px}
+.logo i{width:30px;height:30px;border-radius:50%;background:var(--tomato);display:grid;place-items:center}
+.logo svg{width:16px;height:16px}
+.links{display:flex;gap:22px;align-items:center}
+.links a{text-decoration:none;font-weight:500;color:var(--mist)}
+.links a:hover{color:#fff}
+.links .btn{min-height:44px;padding:0 18px;font-size:16px;color:var(--ink)}
+.progress{position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--tomato);transform-origin:0 50%;transform:scaleX(0)}
+
+/* hero */
+.hero{position:relative;padding:clamp(56px,9vw,120px) 0 0;overflow:hidden}
+.ring{display:inline-flex;align-items:center;gap:12px;font-weight:700;color:var(--sun);margin-bottom:26px}
+.ring i{width:46px;height:46px;border-radius:50%;background:var(--tomato);display:grid;place-items:center;position:relative}
+.ring i::before,.ring i::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--tomato);animation:pulse 1.8s ease-out infinite}
+.ring i::after{animation-delay:.9s}
+.ring svg{width:22px;height:22px;animation:wiggle 1.8s ease-in-out infinite}
+@keyframes pulse{from{transform:scale(1);opacity:.9}to{transform:scale(2.1);opacity:0}}
+@keyframes wiggle{0%,40%,100%{transform:rotate(0)}5%,15%,25%{transform:rotate(-16deg)}10%,20%,30%{transform:rotate(16deg)}}
+.hero h1{font-size:clamp(50px,10.5vw,148px);line-height:.88;letter-spacing:-.05em}
+.hero h1 span{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 span b{display:block;font-weight:800;transform:translateY(105%);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 span:nth-child(2) b{animation-delay:.12s;color:var(--tomato)}
+.hero h1 span:nth-child(3) b{animation-delay:.24s}
+@keyframes rise{to{transform:none}}
+.hero-low{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px 60px;align-items:end;margin-top:40px;opacity:0;animation:fade .8s .5s forwards}
+@keyframes fade{to{opacity:1}}
+.hero-low p{font-size:clamp(18px,1.7vw,21px);color:var(--mist);max-width:32em}
+.hero-low p b{color:#fff;font-weight:700}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.price-pill{display:inline-flex;align-items:baseline;gap:8px;margin-top:22px;color:var(--mist);font-size:15px}
+.price-pill b{font-size:28px;color:var(--sun);letter-spacing:-.03em}
+
+/* tickets qui défilent */
+.rail{margin-top:clamp(56px,8vw,100px);border-top:2px dashed rgba(255,255,255,.18);padding:26px 0 30px;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:18px;width:max-content;animation:slide 38s linear infinite}
+.rail:hover .track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.tk{background:#fff;color:var(--ink);width:210px;padding:14px 16px 16px;border-radius:4px;position:relative;transform:rotate(var(--r,0deg));flex:none}
+.tk::before{content:"";position:absolute;top:-7px;left:50%;width:34px;height:12px;margin-left:-17px;background:var(--sun);border-radius:3px}
+.tk b{display:block;font-size:28px;letter-spacing:-.04em;line-height:1}
+.tk span{display:block;font-size:15px;margin-top:4px}
+.tk em{display:block;font-style:normal;font-size:13px;color:#6d5f86;margin-top:10px;border-top:1px dashed #cdbfe0;padding-top:8px}
+.tk.alt{background:var(--tomato);color:#fff}
+.tk.alt em{color:#ffe1d8;border-color:rgba(255,255,255,.4)}
+
+/* gros texte qui glisse au scroll */
+.slogan{background:var(--tomato);padding:clamp(28px,4vw,44px) 0;overflow:hidden}
+.slogan p{font-size:clamp(56px,11vw,150px);font-weight:800;letter-spacing:-.05em;line-height:1;white-space:nowrap;will-change:transform}
+.slogan p + p{color:var(--night)}
+
+/* la soirée au scroll */
+.story{position:relative;height:520vh}
+.stage{position:sticky;top:64px;height:calc(100svh - 64px);display:flex;flex-direction:column;justify-content:center;gap:20px}
+.stage .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px 70px;align-items:center;width:100%}
+.clock-label{color:var(--mist);font-weight:500;font-size:18px}
+.clock{font-size:clamp(84px,15vw,210px);font-weight:800;letter-spacing:-.06em;line-height:.9;font-variant-numeric:tabular-nums;color:var(--sun)}
+.moment{font-size:clamp(20px,2vw,26px);font-weight:700;margin-top:16px;min-height:2.6em;letter-spacing:-.02em}
+.tally{display:flex;gap:28px;margin-top:26px;color:var(--mist);font-size:15px}
+.tally b{display:block;font-size:40px;color:#fff;letter-spacing:-.04em;line-height:1}
+.phone{background:#fff;color:var(--ink);border-radius:30px;padding:20px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6);max-width:470px;width:100%;justify-self:end}
+.ph-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #ece6f4;font-size:14px}
+.ph-top b{font-size:16px}
+.live{display:flex;align-items:center;gap:7px;color:var(--tomato);font-weight:700}
+.live i{width:9px;height:9px;border-radius:50%;background:var(--tomato);animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+#wave{display:block;width:100%;height:46px;margin:12px 0 4px}
+.chat{display:grid;gap:10px;min-height:290px;align-content:start}
+.m{max-width:88%;padding:11px 15px;border-radius:18px;font-size:16px;line-height:1.38;opacity:0;transform:translateY(14px) scale(.97);transition:opacity .35s,transform .35s}
+.m.on{opacity:1;transform:none}
+.m.c{background:#f1edf7;justify-self:start;border-bottom-left-radius:5px}
+.m.a{background:var(--night);color:#fff;justify-self:end;border-bottom-right-radius:5px}
+.m small{display:block;font-size:12px;opacity:.6;margin-bottom:2px}
+.m.sys{justify-self:stretch;max-width:none;background:none;border:2px dashed var(--tomato);color:var(--tomato);font-weight:700;font-size:15px;border-radius:12px}
+.ex{text-align:center;font-size:13px;color:var(--mist);margin:12px auto 0}
+.dots{display:flex;gap:6px;margin-top:20px;justify-content:center}
+.dots i{width:30px;height:5px;border-radius:3px;background:rgba(255,255,255,.2);transition:background .3s}
+.dots i.on{background:var(--sun)}
+
+/* calcul */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px 60px;margin-top:50px;align-items:stretch}
+.field{display:grid;gap:4px;margin-bottom:22px}
+.field label{display:flex;justify-content:space-between;gap:10px;font-weight:500}
+.field output{font-weight:800;font-size:20px;color:var(--sun)}
+input[type=range]{width:100%;accent-color:var(--tomato);height:34px}
+.result{background:var(--tomato);border-radius:28px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.result .lbl{font-size:18px;font-weight:500}
+.big{font-size:clamp(60px,9vw,120px);font-weight:800;letter-spacing:-.06em;line-height:.9;font-variant-numeric:tabular-nums}
+.vs{font-size:18px}
+.vs b{color:var(--sun)}
+#ratio{display:block;font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-.03em;margin-top:6px;color:var(--night)}
+.note{font-size:14px;color:var(--mist);margin-top:8px}
+
+/* ce que fait l'agent */
+.does{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 60px;margin-top:50px}
+.does div{border-top:2px solid rgba(255,255,255,.15);padding:24px 0 34px}
+.does p{color:var(--mist);margin-top:10px;max-width:30em}
+
+/* étapes */
+.light{background:#fff;color:var(--ink)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:56px;counter-reset:s}
+.step{counter-increment:s}
+.step::before{content:counter(s);display:block;font-size:110px;font-weight:800;letter-spacing:-.06em;line-height:.8;color:var(--tomato);margin-bottom:18px}
+.step p{margin-top:10px;color:#5a4c70}
+.step em{display:inline-block;margin-top:14px;font-style:normal;font-weight:700;background:var(--night);color:#fff;padding:4px 12px;border-radius:999px;font-size:14px}
+
+/* tarifs */
+.offer-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px}
+.count{background:var(--sun);color:var(--ink);border-radius:18px;padding:12px 20px;font-weight:700}
+.count b{font-size:30px;letter-spacing:-.04em}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:50px;align-items:start}
+.plan{border:2px solid rgba(255,255,255,.18);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:12px;position:relative;height:100%}
+.plan.best{background:#fff;color:var(--ink);border-color:#fff}
+.badge{position:absolute;top:-15px;left:26px;background:var(--tomato);color:#fff;font-weight:700;font-size:14px;padding:5px 14px;border-radius:999px}
+.tag{color:var(--mist)}
+.plan.best .tag,.plan.best .was{color:#5a4c70}
+.price{font-size:clamp(46px,5vw,64px);font-weight:800;letter-spacing:-.05em;line-height:1;margin-top:6px}
+.price small{font-size:16px;font-weight:500;letter-spacing:0}
+.was{font-size:15px;color:var(--mist)}
+.then{font-weight:700}
+.feats{list-style:none;padding:0;margin:8px 0 14px;display:grid;gap:9px;font-size:16px;line-height:1.4}
+.feats li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px}
+.feats li::before{content:"";width:14px;height:8px;border-left:3px solid var(--sun);border-bottom:3px solid var(--sun);transform:rotate(-45deg);margin-top:5px}
+.plan.best .feats li::before{border-color:var(--tomato)}
 .plan .btn{margin-top:auto}
-.after{margin-top:18px;font-size:15px;opacity:.85}
-.guar{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;align-items:center;margin-top:24px;padding:18px;border-radius:18px;border:2px solid var(--yel)}
-.guar svg{width:56px;height:56px}
-.extra{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:center;padding:18px;border-radius:18px;background:rgba(255,255,255,.06)}
-.faq details{border-bottom:1px solid var(--line);padding:16px 0}
-.faq summary{cursor:pointer;font-weight:800;font-size:17px;min-height:28px}
-.faq details p{margin-top:10px;color:var(--soft);max-width:60em}
-.contact{background:var(--red);color:#fff}
-.direct{display:grid;gap:12px;margin:18px 0}
-.direct .btn{justify-content:flex-start}
-.direct small{display:block;font-size:14px;opacity:.9;margin-top:-6px}
-form{display:grid;gap:14px;background:#fff;color:#1d1210;border-radius:20px;padding:22px}
+.guar{display:flex;gap:16px;align-items:center;margin-top:30px;padding:20px 24px;border-radius:22px;background:var(--night2)}
+.guar svg{width:50px;height:50px;flex:none}
+.after{margin-top:18px;font-size:15px;color:var(--mist);max-width:70em}
+
+/* faq */
+.faq details{border-top:2px solid rgba(27,16,48,.12);padding:22px 0}
+.faq summary{cursor:pointer;font-weight:700;font-size:clamp(19px,2vw,24px);letter-spacing:-.02em;list-style:none;display:flex;justify-content:space-between;gap:20px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:32px;line-height:.8;color:var(--tomato);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin-top:12px;color:#5a4c70;max-width:60em}
+
+/* contact */
+.contact .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px 60px;align-items:start}
+.contact .lead{color:var(--mist);font-size:20px;margin-top:20px}
+.direct{display:grid;gap:12px;margin-top:28px;max-width:420px}
+.direct small{color:var(--mist);font-size:15px}
+form{display:grid;gap:14px;background:#fff;color:var(--ink);border-radius:28px;padding:clamp(20px,3vw,32px)}
 .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 form label{display:grid;gap:6px;font-weight:700;font-size:15px}
-form input,form textarea,form select{font:inherit;font-size:16px;padding:12px 14px;border:2px solid #d9c9c3;border-radius:12px;background:#fff;color:#1d1210;width:100%}
+form input,form textarea,form select{font:inherit;font-size:16px;padding:12px 14px;border:2px solid #ddd4ea;border-radius:14px;background:#fff;color:var(--ink);width:100%}
 textarea{min-height:100px;resize:vertical}
-#done{display:none;background:#fff3ef;border:2px solid #e3381f;border-radius:12px;padding:12px 14px;font-size:15px}
-.sticky{display:none}
-footer{background:#1d1210;color:#cdbdb7;font-size:14px}
+#done{display:none;background:#fff1ec;border:2px solid var(--tomato);border-radius:14px;padding:12px 14px;font-size:15px}
+footer{border-top:1px solid rgba(255,255,255,.12);padding:32px 0;color:var(--mist);font-size:14px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px}
 footer b{color:#fff}
-@media(max-width:860px){.steps{grid-template-columns:minmax(0,1fr)}.calc{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:760px){.hero .wrap,.split,.plans{grid-template-columns:minmax(0,1fr)}.row{grid-template-columns:minmax(0,1fr)}.links a:not(.navcta){display:none}}
-@media(max-width:600px){.m{max-width:94%}.sticky{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:9;box-shadow:0 8px 24px rgba(0,0,0,.25)}body{padding-bottom:76px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.sticky{display:none}
+
+/* apparition au scroll */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero-low,.calc,.does,.contact .wrap{grid-template-columns:minmax(0,1fr)}
+  .steps,.plans{grid-template-columns:minmax(0,1fr)}
+  .stage .wrap{grid-template-columns:minmax(0,1fr);gap:18px}
+  .phone{justify-self:stretch;max-width:none;padding:14px;border-radius:22px}
+  .chat{min-height:220px}
+  .m{font-size:15px;padding:9px 13px}
+  .clock{font-size:clamp(64px,20vw,110px)}
+  .moment{min-height:auto;margin-top:8px;font-size:19px}
+  .tally{display:none}
+  .links a:not(.btn){display:none}
+}
+@media(max-width:600px){.clock-label{display:none}.clock{font-size:64px}.moment{font-size:17px}.chat{min-height:0}.m{font-size:14px;padding:8px 12px}.ph-top{font-size:13px}.stage{justify-content:flex-start;padding-top:14px}.row{grid-template-columns:minmax(0,1fr)}.sticky{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:30;box-shadow:0 10px 30px rgba(0,0,0,.4)}body{padding-bottom:80px}#wave{height:32px}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero h1 span b{transform:none}.hero-low{opacity:1}.rv{opacity:1;transform:none}
+  .track{flex-wrap:wrap;width:auto}
+}
 </style>
 </head>
 <body>
 
-<div class="top">Offre de lancement : installation offerte et 3 premiers mois à prix réduit, jusqu'au 18 décembre. <a href="#offre">Voir les formules</a></div>
+<div class="top">Offre de lancement : installation offerte et 3 premiers mois à prix réduit, jusqu'au 18 décembre.</div>
 
 <nav aria-label="Navigation principale">
   <div class="wrap">
-    <a class="logo" href="#haut">
-      <svg viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="11" width="3" height="6" rx="1.5" fill="#fff"/><rect x="9" y="6" width="3" height="16" rx="1.5" fill="#fff"/><rect x="15" y="3" width="3" height="22" rx="1.5" fill="#fff"/><rect x="21" y="9" width="3" height="10" rx="1.5" fill="#fff"/></svg>
-      Voxa AL
-    </a>
+    <a class="logo" href="#"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></i>Voxa AL</a>
     <div class="links">
-      <a href="#calcul">Combien vous perdez</a>
-      <a href="#fonctionnement">Comment ça marche</a>
-      <a href="#offre">Tarifs</a>
+      <a href="#soiree">La soirée</a>
+      <a href="#perte">Combien vous perdez</a>
+      <a href="#tarifs">Tarifs</a>
       <a href="#faq">Questions</a>
-      <a class="navcta" href="#contact">Démo gratuite</a>
+      <a class="btn sun" href="#contact">Démo gratuite</a>
     </div>
   </div>
+  <div class="progress" id="progress"></div>
 </nav>
 
-<header class="hero band" id="haut">
+<header class="hero">
   <div class="wrap">
-    <div>
-      <h1>Votre restaurant répond à chaque appel, même en plein coup de feu.</h1>
-      <p class="lead">Un agent vocal IA décroche à votre place : il prend les réservations, donne vos horaires et répond aux questions de vos clients, 7j/7. Vous restez en cuisine ou en salle.</p>
-      <div class="promo">Dès <b>89 €/mois</b> <span>· installation <b>offerte</b> pour les 5 premiers restaurants</span></div>
-      <div class="ctas">
-        <a class="btn white" href="#contact">Je veux ma démo gratuite</a>
-        <a class="btn" href="#calcul">Combien je perds ?</a>
-      </div>
-      <div class="trust"><span>Sans engagement</span><span>Satisfait ou remboursé 14 jours</span><span>Je me déplace</span></div>
-    </div>
-
-    <div class="call" role="img" aria-label="Exemple d'appel : un client réserve une table auprès de l'agent vocal">
-      <div class="call-top">
-        <div class="who">
-          <div class="dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></div>
-          <div><b>Agent vocal du restaurant</b><span>Appel entrant · samedi 20h12</span></div>
+    <div class="ring"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></i>Vendredi, 20h12. Ça sonne.</div>
+    <h1><span><b>Le téléphone sonne.</b></span><span><b>Vous êtes en service.</b></span><span><b>L'agent décroche.</b></span></h1>
+    <div class="hero-low">
+      <p>Un agent vocal IA répond aux appels de votre restaurant à votre place : <b>il prend les réservations, donne vos horaires et répond aux questions, 7j/7.</b> Vous restez en cuisine ou en salle.</p>
+      <div>
+        <div class="cta">
+          <a class="btn sun" href="#contact">Je veux ma démo gratuite</a>
+          <a class="btn" href="#perte">Combien je perds ?</a>
         </div>
-        <span class="live"><i></i>En ligne</span>
+        <div class="price-pill">Dès <b>89 €/mois</b> · installation offerte pour les 5 premiers restaurants</div>
       </div>
-      <div class="wave"><svg id="wave" aria-hidden="true"></svg></div>
-      <div class="msgs">
-        <div class="m c"><small>Client</small>Bonsoir, vous avez une table pour 4 demain midi ?</div>
-        <div class="m a"><small>Agent Voxa</small>Bonsoir ! Oui, j'ai de la place à 12h15 ou à 13h. Laquelle vous arrange ?</div>
-        <div class="m c"><small>Client</small>12h15, au nom de Martin.</div>
-        <div class="m a"><small>Agent Voxa</small>C'est noté : 4 personnes, dimanche 12h15, au nom de Martin. Le restaurant reçoit votre réservation tout de suite.</div>
-      </div>
-      <div class="ticket"><b>Réservation transmise</b><span>Martin · 4 pers.</span><span>Dim. 12h15</span></div>
-      <p class="sample">Exemple de conversation, pour illustrer.</p>
     </div>
+  </div>
+  <div class="rail" aria-label="Exemples de réservations prises par l'agent">
+    <div class="track" id="track">
+      <div class="tk" style="--r:-2deg"><b>20h30</b><span>Table pour 4 · Martin</span><em>Réservé par l'agent</em></div>
+      <div class="tk alt" style="--r:1.5deg"><b>12h15</b><span>2 couverts · Dupont</span><em>Réservé à 23h40, restaurant fermé</em></div>
+      <div class="tk" style="--r:-1deg"><b>19h45</b><span>Groupe de 12 · Lefebvre</span><em>Transmis au gérant par SMS</em></div>
+      <div class="tk" style="--r:2deg"><b>21h00</b><span>Table pour 2 · Nguyen</span><em>Réservé pendant le coup de feu</em></div>
+      <div class="tk alt" style="--r:-1.5deg"><b>13h00</b><span>6 couverts · Benali</span><em>Anniversaire, gâteau prévu</em></div>
+      <div class="tk" style="--r:1deg"><b>20h00</b><span>Table pour 3 · Verbeke</span><em>Appel en néerlandais</em></div>
+    </div>
+    <p class="ex wrap">Exemples de réservations, pour illustrer.</p>
   </div>
 </header>
 
-<section class="band" id="calcul">
+<section class="slogan" aria-hidden="true">
+  <p data-dir="-1">Plus aucun appel manqué · Plus aucun appel manqué · Plus aucun appel manqué ·</p>
+  <p data-dir="1">Réservations 24h/24 · Réservations 24h/24 · Réservations 24h/24 ·</p>
+</section>
+
+<section class="story" id="soiree">
+  <div class="stage">
+    <div class="wrap">
+      <div>
+        <p class="clock-label">Exemple : un vendredi soir avec Voxa AL</p>
+        <div class="clock" id="clock">19:00</div>
+        <p class="moment" id="moment">Le service commence.</p>
+        <div class="tally">
+          <div><b id="t-calls">0</b>appels décrochés</div>
+          <div><b id="t-res">0</b>réservations</div>
+          <div><b>0</b>appel manqué</div>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="ph-top"><div><b>Agent du restaurant</b><br><span id="ph-sub">En attente d'appel</span></div><span class="live"><i></i>En ligne</span></div>
+        <svg id="wave" aria-hidden="true"></svg>
+        <div class="chat" id="chat" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <p class="ex">Exemple de soirée et de conversations, pour illustrer.</p>
+  </div>
+</section>
+
+<section class="band" id="perte">
   <div class="wrap">
-    <h2>Combien vous coûtent les appels sans réponse ?</h2>
-    <p class="lead" style="margin-top:14px">Un client qui tombe sur la sonnerie dans le vide réserve souvent ailleurs. Réglez les curseurs avec vos chiffres.</p>
-    <div class="calc">
+    <h2 class="rv">Combien vous coûtent les appels sans réponse ?</h2>
+    <p class="rv" style="color:var(--mist);font-size:20px;margin-top:20px;max-width:34em">Un client qui tombe sur la sonnerie dans le vide réserve souvent ailleurs. Réglez les curseurs avec vos chiffres.</p>
+    <div class="calc rv">
       <div>
         <div class="field"><label for="c1">Appels manqués par semaine <output id="o1"></output></label><input type="range" id="c1" min="1" max="60" value="10"></div>
         <div class="field"><label for="c2">Part qui voulait réserver <output id="o2"></output></label><input type="range" id="c2" min="10" max="100" step="5" value="50"></div>
         <div class="field"><label for="c3">Couverts par réservation <output id="o3"></output></label><input type="range" id="c3" min="1" max="8" value="3"></div>
         <div class="field"><label for="c4">Addition moyenne par personne <output id="o4"></output></label><input type="range" id="c4" min="10" max="80" value="25"></div>
+        <p class="note">Estimation à partir de vos réglages (4,3 semaines par mois), pas une promesse de résultat.</p>
       </div>
-      <div class="result" aria-live="polite">
-        <span>Chiffre d'affaires perdu chaque mois, environ</span>
+      <div class="result">
+        <p class="lbl">Chiffre d'affaires perdu chaque mois, environ</p>
         <span class="big" id="lost">0 €</span>
-        <div class="bar" aria-hidden="true"><i id="barfill" style="width:5%"></i></div>
-        <div class="vs"><span>Voxa AL : <b>89 €/mois</b></span><span id="ratio"></span></div>
+        <p class="vs">Voxa AL : <b>89 €/mois</b><span id="ratio"></span></p>
       </div>
     </div>
-    <p class="note">Estimation à partir de vos réglages (4,3 semaines par mois), pas une promesse de résultat.</p>
   </div>
 </section>
 
-<section class="band" id="probleme" style="padding-top:0">
-  <div class="wrap split">
-    <div>
-      <h2>Tout ce qui vous interrompt pendant le service.</h2>
-      <p class="lead" style="margin-top:16px">Entre deux assiettes, impossible de décrocher. Et après la fermeture, personne ne répond. L'agent prend le relais exactement à ces moments-là, sans pause et sans file d'attente.</p>
-    </div>
-    <ul class="list">
-      <li><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm11 8H6v10h12zM8 12h3v3H8z"/></svg></div><div><b>Prend les réservations</b><span>Note le nom, l'heure et le nombre de couverts, puis vous les transmet aussitôt.</span></div></li>
-      <li><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20m1 5h-2v6l5 3 1-1.7-4-2.3z"/></svg></div><div><b>Donne vos infos pratiques</b><span>Horaires, adresse, parking, plat du jour, options végétariennes.</span></div></li>
-      <li><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M4 4h16v12H7l-3 3zm4 5v2h8V9z"/></svg></div><div><b>Vous transmet le reste</b><span>Groupe, demande spéciale, réclamation : vous recevez un résumé par SMS ou par mail.</span></div></li>
-      <li><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 3a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V7a4 4 0 0 1 4-4m7 9a7 7 0 0 1-6 6.9V22h-2v-3.1A7 7 0 0 1 5 12h2a5 5 0 0 0 10 0z"/></svg></div><div><b>Parle naturellement</b><span>Une voix claire et chaleureuse, en français, qui comprend les questions même mal posées.</span></div></li>
-    </ul>
-  </div>
-</section>
-
-<section class="band" id="fonctionnement" style="padding-top:0">
+<section class="band" style="padding-top:0">
   <div class="wrap">
-    <h2>Opérationnel en quelques jours, sans rien installer.</h2>
-    <div class="steps">
-      <div class="step"><h3>Démo de 10 minutes</h3><p>Je passe au restaurant avec un agent déjà prêt. Vous l'appelez vous-même et vous jugez.</p><span class="when">Gratuit</span></div>
-      <div class="step"><h3>Je crée votre agent</h3><p>Votre carte, vos horaires, vos règles de réservation, votre façon d'accueillir. On ajuste ensemble jusqu'à ce que ce soit parfait.</p><span class="when">Quelques jours</span></div>
-      <div class="step"><h3>Il répond à vos clients</h3><p>Vos appels sont renvoyés vers l'agent quand vous le décidez : en service, le soir, ou tout le temps. Vous gardez votre numéro.</p><span class="when">Suivi inclus</span></div>
+    <h2 class="rv">Tout ce qui vous interrompt pendant le service.</h2>
+    <div class="does">
+      <div class="rv"><h3>Prend les réservations</h3><p>Note le nom, l'heure et le nombre de couverts, puis vous les transmet aussitôt.</p></div>
+      <div class="rv"><h3>Donne vos infos pratiques</h3><p>Horaires, adresse, parking, plat du jour, options végétariennes.</p></div>
+      <div class="rv"><h3>Vous transmet le reste</h3><p>Groupe, demande spéciale, réclamation : vous recevez un résumé par mail, ou par SMS avec les formules Pro et Premium.</p></div>
+      <div class="rv"><h3>Parle naturellement</h3><p>Une voix claire et chaleureuse, en français, qui comprend les questions même mal posées.</p></div>
     </div>
   </div>
 </section>
 
-<section class="band dark" id="offre">
+<section class="band light">
+  <div class="wrap">
+    <h2 class="rv">Opérationnel en quelques jours, sans rien installer.</h2>
+    <div class="steps">
+      <div class="step rv"><h3>Démo de 10 minutes</h3><p>Nous passons au restaurant avec un agent déjà prêt. Vous l'appelez vous-même et vous jugez.</p><em>Gratuit</em></div>
+      <div class="step rv"><h3>Nous créons votre agent</h3><p>Votre carte, vos horaires, vos règles de réservation, votre façon d'accueillir. On ajuste ensemble jusqu'à ce que ce soit parfait.</p><em>Quelques jours</em></div>
+      <div class="step rv"><h3>Il répond à vos clients</h3><p>Vos appels sont renvoyés vers l'agent quand vous le décidez : en service, le soir, ou tout le temps. Vous gardez votre numéro.</p><em>Suivi inclus</em></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="tarifs">
   <div class="wrap">
     <div class="offer-head">
-      <h2>Trois formules. Offre de lancement pour les 5 premiers restaurants.</h2>
-      <div class="count">Fin de l'offre dans <b id="days">quelques</b> jours</div>
+      <h2 class="rv">Trois formules. Offre de lancement pour les 5 premiers restaurants.</h2>
+      <div class="count rv">Fin de l'offre dans <b id="days">quelques</b> jours</div>
     </div>
     <div class="plans">
-      <div class="plan">
+      <div class="plan rv">
         <h3>Essentiel</h3>
         <p class="tag">Pour ne plus rater aucun appel</p>
         <p class="price">199 € <small>les 3 premiers mois</small></p>
         <p class="was"><b>Installation offerte</b> (149 €) · 3 mois au lieu de 416 €</p>
         <p class="then">Puis 89 €/mois, sans engagement</p>
-        <ul class="feats"><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Répond 24h/24 et 7j/7, même pendant le service</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Horaires, adresse, parking, carte et plats du jour</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Prend les messages : nom, numéro et motif</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Résumé de chaque appel envoyé par mail</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>200 minutes</b> d’appels par mois</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Modifications de carte et d’horaires incluses</span></li></ul>
-        <a class="btn white" href="#contact" data-plan="Essentiel">Je choisis Essentiel</a>
+        <ul class="feats"><li>Répond 24h/24 et 7j/7, même pendant le service</li><li>Horaires, adresse, parking, carte et plats du jour</li><li>Prend les messages : nom, numéro et motif</li><li>Résumé de chaque appel envoyé par mail</li><li><span><b>200 minutes</b> d'appels par mois</span></li><li>Modifications de carte et d'horaires incluses</li></ul>
+        <a class="btn" href="#contact" data-plan="Essentiel">Je choisis Essentiel</a>
       </div>
-      <div class="plan best">
-        <span class="badge">Le plus choisi</span>
+      <div class="plan best rv">
+        <span class="badge">Recommandé</span>
         <h3>Pro</h3>
         <p class="tag">Pour remplir la salle</p>
         <p class="price">329 € <small>les 3 premiers mois</small></p>
         <p class="was"><b>Installation offerte</b> (249 €) · 3 mois au lieu de 666 €</p>
         <p class="then">Puis 139 €/mois, sans engagement</p>
-        <ul class="feats"><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Tout Essentiel</b>, plus :</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Prise de réservation complète : jour, heure, couverts, nom, téléphone</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cahier de réservations Google Sheets, rempli en direct</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Alerte SMS à chaque nouvelle réservation</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Groupes, annulations et modifications triés pour vous</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Transfert de l’appel vers vous en cas d’urgence</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>400 minutes</b> d’appels par mois</span></li></ul>
-        <a class="btn red" href="#contact" data-plan="Pro">Je choisis Pro</a>
+        <ul class="feats"><li><span><b>Tout Essentiel</b>, plus :</span></li><li>Prise de réservation complète : jour, heure, couverts, nom, téléphone</li><li>Cahier de réservations Google Sheets, rempli en direct</li><li>Alerte SMS à chaque nouvelle réservation</li><li>Groupes, annulations et modifications triés pour vous</li><li>Transfert de l'appel vers vous en cas d'urgence</li><li><span><b>400 minutes</b> d'appels par mois</span></li></ul>
+        <a class="btn tomato" href="#contact" data-plan="Pro">Je choisis Pro</a>
       </div>
-      <div class="plan">
+      <div class="plan rv">
         <h3>Premium</h3>
         <p class="tag">Tout compris, zéro souci</p>
         <p class="price">479 € <small>les 3 premiers mois</small></p>
         <p class="was"><b>Installation offerte</b> (349 €) · 3 mois au lieu de 946 €</p>
         <p class="then">Puis 199 €/mois, sans engagement</p>
-        <ul class="feats"><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Tout Pro</b>, plus :</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>SMS de confirmation envoyé à votre client</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Agent multilingue : français, anglais, néerlandais</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Bilan mensuel : appels, réservations, heures de pointe</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Voix choisie avec vous, à l’image du restaurant</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Modifications prioritaires sous 24 h</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>800 minutes</b> d’appels par mois</span></li></ul>
-        <a class="btn white" href="#contact" data-plan="Premium">Je choisis Premium</a>
+        <ul class="feats"><li><span><b>Tout Pro</b>, plus :</span></li><li>SMS de confirmation envoyé à votre client</li><li>Agent multilingue : français, anglais, néerlandais</li><li>Bilan mensuel : appels, réservations, heures de pointe</li><li>Voix choisie avec vous, à l'image du restaurant</li><li>Modifications prioritaires sous 24 h</li><li><span><b>800 minutes</b> d'appels par mois</span></li></ul>
+        <a class="btn" href="#contact" data-plan="Premium">Je choisis Premium</a>
       </div>
     </div>
-    <div class="guar">
-      <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 4l20 8v14c0 13-9 22-20 26C17 48 8 39 8 26V12z" fill="#ffd23f"/><path d="M19 28l6 6 12-13" stroke="#1d1210" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <p><b>Satisfait ou remboursé pendant 14 jours.</b> Si l'agent ne vous convient pas, je vous rembourse intégralement. Vous ne prenez aucun risque.</p>
+    <div class="guar rv">
+      <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 4l20 8v14c0 13-9 22-20 26C17 48 8 39 8 26V12z" fill="#ffd23f"/><path d="M19 28l6 6 12-13" stroke="#1b1030" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p><b>Satisfait ou remboursé pendant 14 jours.</b> Si l'agent ne vous convient pas, nous vous remboursons intégralement. Vous ne prenez aucun risque.</p>
     </div>
     <p class="after">Offre de lancement : les 3 premiers mois sont payés en une fois, installation offerte. Hors offre, installation 149 € (Essentiel), 249 € (Pro) ou 349 € (Premium). Minutes supplémentaires : 0,25 € la minute. TVA non applicable, art. 293 B du CGI.</p>
   </div>
 </section>
 
-<section class="band faq" id="faq">
+<section class="band light faq" id="faq">
   <div class="wrap">
-    <h2>Vos questions</h2>
-    <div style="margin-top:20px">
+    <h2 class="rv">Vos questions</h2>
+    <div style="margin-top:40px">
       <details open><summary>Est-ce que je garde mon numéro de téléphone ?</summary><p>Oui. Vos appels sont simplement renvoyés vers l'agent, aux moments que vous choisissez. Vos clients composent toujours le même numéro.</p></details>
       <details><summary>Mes clients sauront-ils qu'ils parlent à une IA ?</summary><p>Oui, l'agent se présente comme l'assistant vocal du restaurant. C'est plus honnête, et vos clients obtiennent leur réponse tout de suite au lieu de tomber dans le vide.</p></details>
       <details><summary>Que se passe-t-il si l'agent ne sait pas répondre ?</summary><p>Il prend les coordonnées du client et vous envoie un résumé de la demande pour que vous puissiez rappeler.</p></details>
-      <details><summary>Quelle formule choisir ?</summary><p>Essentiel si vous voulez surtout que quelqu'un réponde et prenne les messages. Pro si vous prenez des réservations par téléphone : c'est la formule la plus choisie. Premium si vous recevez beaucoup de touristes ou de clients belges, et si vous voulez des SMS de confirmation et un bilan chaque mois.</p></details>
+      <details><summary>Quelle formule choisir ?</summary><p>Essentiel si vous voulez surtout que quelqu'un réponde et prenne les messages. Pro si vous prenez des réservations par téléphone : c'est celle que nous recommandons à la plupart des restaurants. Premium si vous recevez beaucoup de touristes ou de clients belges, et si vous voulez des SMS de confirmation et un bilan chaque mois.</p></details>
       <details><summary>Et si je dépasse mes minutes ?</summary><p>Chaque minute en plus est facturée 0,25 €. Un appel de réservation dure environ une minute : 400 minutes, c'est déjà plusieurs centaines d'appels.</p></details>
       <details><summary>Je peux arrêter quand je veux ?</summary><p>Oui. Après les 3 premiers mois de l'offre de lancement, chaque formule est sans engagement et s'arrête quand vous voulez. Et pendant les 14 premiers jours, vous êtes remboursé si l'agent ne vous convient pas.</p></details>
       <details><summary>Qui êtes-vous ?</summary><p>Voxa AL est une jeune entreprise basée à Tourcoing. Nous créons et gérons nous-mêmes chaque agent, et nous nous déplaçons dans toute la métropole lilloise. Vous avez un interlocuteur direct, pas un centre d'appels.</p></details>
@@ -306,18 +390,18 @@ footer b{color:#fff}
 </section>
 
 <section class="band contact" id="contact">
-  <div class="wrap split">
+  <div class="wrap">
     <div>
-      <h2>Testez l'agent dans votre restaurant, gratuitement.</h2>
-      <p class="lead" style="margin-top:16px">Je passe vous faire une démo de 10 minutes, quand ça vous arrange, en dehors du service.</p>
-      <div class="direct">
-        <a class="btn white" href="tel:+33684419652">Appeler : 06 84 41 96 52</a>
+      <h2 class="rv">Testez l'agent dans votre restaurant, gratuitement.</h2>
+      <p class="lead rv">Nous passons vous faire une démo de 10 minutes, quand ça vous arrange, en dehors du service.</p>
+      <div class="direct rv">
+        <a class="btn sun" href="tel:+33684419652">Appeler : 06 84 41 96 52</a>
         <a class="btn" href="sms:+33684419652">Envoyer un SMS</a>
         <a class="btn" href="mailto:voxa.al.contact@gmail.com?subject=D%C3%A9mo%20agent%20vocal">voxa.al.contact@gmail.com</a>
         <small>Réponse le jour même · Tourcoing, Roubaix, Lille et alentours</small>
       </div>
     </div>
-    <form id="f" action="https://formspree.io/f/xljbokdr" method="POST" novalidate>
+    <form id="f" class="rv" action="https://formspree.io/f/xljbokdr" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Nouvelle demande de démo Voxa AL">
       <h3>Ou laissez vos coordonnées</h3>
       <div class="row">
@@ -329,102 +413,171 @@ footer b{color:#fff}
         <label for="quand">Meilleur moment<select id="quand" name="quand"><option>Le matin</option><option>Entre midi et le soir</option><option>Après le service</option></select></label>
       </div>
       <label for="besoin">Ce qui vous intéresse
-        <select id="besoin" name="besoin">
-          <option>Pro</option>
-          <option>Essentiel</option>
-          <option>Premium</option>
-          <option>Juste une démo</option>
-        </select>
+        <select id="besoin" name="besoin"><option>Juste une démo</option><option>Essentiel</option><option>Pro</option><option>Premium</option></select>
       </label>
       <label for="msg">Message<textarea id="msg" name="msg" placeholder="Par exemple : on rate beaucoup d'appels le vendredi soir."></textarea></label>
-      <button class="btn red" type="submit">Envoyer ma demande</button>
+      <button class="btn tomato" type="submit">Envoyer ma demande</button>
       <div id="done" role="status"></div>
     </form>
   </div>
 </section>
 
-<a class="btn red sticky" href="#contact">Démo gratuite · dès 89 €/mois</a>
+<a class="btn sun sticky" href="#contact">Démo gratuite · dès 89 €/mois</a>
 
-<footer class="band" style="padding-block:28px">
+<footer>
   <div class="wrap">
     <p><b>Voxa AL</b> · Agents vocaux IA et vidéos pour restaurants · Tourcoing</p>
-    <p>Mentions légales : éditeur du site Airone Parez EI · SIRET en cours d'attribution · TVA non applicable, art. 293 B du CGI</p>
+    <p>Mentions légales : éditeur du site Airone Parez EI · SIRET en cours d'attribution · Hébergement : GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis · TVA non applicable, art. 293 B du CGI</p>
   </div>
 </footer>
 
 <script>
 {
   const $ = id => document.getElementById(id);
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const eur = n => Math.round(n).toLocaleString('fr-FR') + ' €';
 
-  const s = $('wave');
-  let t = 0;
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const draw = () => {
-    const W = s.clientWidth, H = s.clientHeight;
-    if (!W) return;
-    const n = Math.max(24, Math.floor(W / 9)), gap = W / n, mid = H / 2;
-    let out = '';
+  // tickets : on double la piste pour une boucle sans couture
+  const track = $('track');
+  if (!still) track.innerHTML += track.innerHTML.replace(/<div class="tk/g, '<div aria-hidden="true" class="tk');
+
+  // la soirée
+  const scenes = [
+    { t: '19:12', moment: 'Premier appel. Vous dressez les tables.', sub: 'Appel entrant · 19h12', res: 1, msgs: [
+      ['c', 'Bonsoir, vous avez une table pour 4 demain midi ?'],
+      ['a', 'Bonsoir ! Oui, j\'ai de la place à 12h15 ou à 13h. Laquelle vous arrange ?'],
+      ['c', '12h15, au nom de Martin.'],
+      ['sys', 'Réservation transmise · Martin · 4 pers. · sam. 12h15']] },
+    { t: '20:05', moment: 'Coup de feu. Personne ne peut décrocher.', sub: 'Appel entrant · 20h05', res: 0, msgs: [
+      ['c', 'Il y a un parking près du restaurant ?'],
+      ['a', 'Oui, le parking de la place est à deux minutes à pied, gratuit après 19h.'],
+      ['c', 'Parfait, merci !']] },
+    { t: '21:40', moment: 'Une demande spéciale arrive en plein service.', sub: 'Appel entrant · 21h40', res: 0, msgs: [
+      ['c', 'On voudrait venir à 12 pour un anniversaire samedi prochain.'],
+      ['a', 'Avec plaisir ! Je transmets votre demande au gérant, il vous rappelle demain matin. C\'est à quel nom ?'],
+      ['c', 'Lefebvre, 06 39 98 12 34.'],
+      ['sys', 'SMS envoyé au gérant · Groupe de 12 · Lefebvre']] },
+    { t: '23:10', moment: 'Le restaurant est fermé. L\'agent, non.', sub: 'Appel entrant · 23h10', res: 1, msgs: [
+      ['c', 'Je sais qu\'il est tard, il reste de la place dimanche soir ?'],
+      ['a', 'Pas de souci ! Il reste une table pour 2 à 20h. Je vous la réserve ?'],
+      ['c', 'Oui, au nom de Nguyen.'],
+      ['sys', 'Réservation transmise · Nguyen · 2 pers. · dim. 20h00']] }
+  ];
+  const story = document.querySelector('.story'), chat = $('chat'), clock = $('clock'), moment = $('moment'), sub = $('ph-sub'), dots = $('dots');
+  dots.innerHTML = scenes.map(() => '<i></i>').join('');
+  let cur = -1, shown = -1;
+  const render = (i, k) => {
+    if (i !== cur) {
+      cur = i; shown = -1;
+      chat.innerHTML = scenes[i].msgs.map(([w, txt]) => `<div class="m ${w}">${w === 'c' ? '<small>Client</small>' : w === 'a' ? '<small>Agent Voxa</small>' : ''}${txt}</div>`).join('');
+      moment.textContent = scenes[i].moment;
+      sub.textContent = scenes[i].sub;
+      [...dots.children].forEach((d, j) => d.classList.toggle('on', j <= i));
+      $('t-calls').textContent = i + 1;
+      $('t-res').textContent = scenes.slice(0, i + 1).reduce((s, x) => s + x.res, 0);
+    }
+    if (k !== shown) { shown = k; [...chat.children].forEach((m, j) => m.classList.toggle('on', j <= k)); }
+  };
+  const toMin = s => { const [h, m] = s.split(':'); return +h * 60 + +m; };
+  const fmt = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(Math.floor(m % 60)).padStart(2, '0');
+
+  // vague de voix
+  const wave = $('wave'); let wt = 0;
+  const drawWave = () => {
+    const W = wave.clientWidth, H = wave.clientHeight; if (!W) return;
+    const n = Math.max(24, Math.floor(W / 9)), g = W / n, mid = H / 2; let o = '';
     for (let i = 0; i < n; i++) {
       const env = Math.sin(Math.PI * (i + .5) / n);
-      const h = Math.max(4, env * (H - 6) * (.35 + .65 * Math.abs(Math.sin(i * .9 + t) * Math.cos(i * .37 - t * .7))));
-      out += `<rect x="${(i * gap + gap * .25).toFixed(1)}" y="${(mid - h / 2).toFixed(1)}" width="${(gap * .5).toFixed(1)}" height="${h.toFixed(1)}" rx="${(gap * .25).toFixed(1)}" fill="#1f8fd6"/>`;
+      const h = Math.max(4, env * (H - 4) * (.3 + .7 * Math.abs(Math.sin(i * .9 + wt) * Math.cos(i * .37 - wt * .7))));
+      o += `<rect x="${(i * g + g * .25).toFixed(1)}" y="${(mid - h / 2).toFixed(1)}" width="${(g * .5).toFixed(1)}" height="${h.toFixed(1)}" rx="${(g * .25).toFixed(1)}" fill="#45b6ff"/>`;
     }
-    s.innerHTML = out;
+    wave.innerHTML = o;
   };
-  const loop = () => { t += .06; draw(); requestAnimationFrame(loop); };
-  const waveRo = new ResizeObserver(draw);
-  waveRo.observe(s);
-  if (!still) loop(); else draw();
+  if (still) drawWave(); else { const loop = () => { wt += .06; drawWave(); requestAnimationFrame(loop); }; loop(); }
 
+  // scroll : barre de progression, slogan qui glisse, soirée
+  const prog = $('progress'), slogans = document.querySelectorAll('.slogan p');
+  const onScroll = () => {
+    const y = scrollY, H = document.documentElement.scrollHeight - innerHeight;
+    prog.style.transform = `scaleX(${H > 0 ? y / H : 0})`;
+    if (!still) slogans.forEach(p => {
+      const r = p.getBoundingClientRect(), d = +p.dataset.dir;
+      const off = (r.top - innerHeight) * .6;
+      p.style.transform = `translateX(${d > 0 ? off - p.scrollWidth * .25 : -off - p.scrollWidth * .35}px)`;
+    });
+    const r = story.getBoundingClientRect();
+    const total = story.offsetHeight - innerHeight;
+    const p = Math.min(1, Math.max(0, -r.top / total));
+    const per = 1 / scenes.length;
+    const i = Math.min(scenes.length - 1, Math.floor(p / per));
+    const local = (p - i * per) / per;
+    const n = scenes[i].msgs.length;
+    render(i, Math.min(n - 1, Math.floor(local * (n + 1)) - 1 + 1));
+    const from = i === 0 ? toMin('19:00') : toMin(scenes[i - 1].t), to = toMin(scenes[i].t);
+    clock.textContent = fmt(from + (to - from) * Math.min(1, local * 2.5));
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  // apparitions
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // calcul, avec un compteur qui monte
+  let shownLost = 0, raf;
+  const animateTo = v => {
+    cancelAnimationFrame(raf);
+    if (still) { $('lost').textContent = eur(v); shownLost = v; return; }
+    const start = shownLost, t0 = performance.now();
+    const step = now => {
+      const k = Math.min(1, (now - t0) / 500), e = 1 - Math.pow(1 - k, 3);
+      shownLost = start + (v - start) * e; $('lost').textContent = eur(shownLost);
+      if (k < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  };
   const calc = () => {
     const a = +$('c1').value, p = +$('c2').value, c = +$('c3').value, x = +$('c4').value;
-    $('o1').textContent = a;
-    $('o2').textContent = p + ' %';
-    $('o3').textContent = c;
-    $('o4').textContent = x + ' €';
+    $('o1').textContent = a; $('o2').textContent = p + ' %'; $('o3').textContent = c; $('o4').textContent = x + ' €';
     const lost = a * 4.3 * (p / 100) * c * x;
-    $('lost').textContent = eur(lost);
+    animateTo(lost);
     const r = lost / 89;
     $('ratio').textContent = r >= 1 ? `soit ${r.toFixed(r < 10 ? 1 : 0).replace('.', ',')} fois le prix de l'agent` : '';
-    $('barfill').style.width = Math.min(100, Math.max(4, lost / 40)) + '%';
   };
   ['c1', 'c2', 'c3', 'c4'].forEach(id => $(id).addEventListener('input', calc));
-  calc();
+  const calcIo = new IntersectionObserver(es => { if (es[0].isIntersecting) { calc(); calcIo.disconnect(); } }, { threshold: .3 });
+  calcIo.observe($('lost'));
 
+  // compte à rebours
   const end = new Date(2026, 11, 18, 23, 59);
   const d = Math.ceil((end - new Date()) / 864e5);
   $('days').textContent = d > 0 ? d : 0;
   if (d <= 0) $('days').parentElement.textContent = 'Offre terminée';
 
-  document.querySelectorAll('[data-plan]').forEach(a => a.addEventListener('click', () => {
-    const v = a.dataset.plan, sel = $('besoin');
-    [...sel.options].forEach(o => { if (o.text === v) sel.value = v; });
-  }));
+  // bouton de formule -> pré-remplit le formulaire
+  document.querySelectorAll('[data-plan]').forEach(a => a.addEventListener('click', () => { $('besoin').value = a.dataset.plan; }));
 
+  // formulaire
   const f = $('f'), done = $('done');
   f.addEventListener('submit', async e => {
     e.preventDefault();
     const v = id => $(id).value.trim();
-    const esc = x => x.replace(/[<>&]/g, c => ({'<': '&lt;', '>': '&gt;', '&': '&amp;'}[c]));
+    const esc = x => x.replace(/[<>&]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
     done.style.display = 'block';
-    if (!v('tel') && !v('nom')) {
-      done.innerHTML = 'Indiquez au moins votre nom et votre téléphone pour que nous puissions vous rappeler.';
-      return;
-    }
-    const btn = f.querySelector('button[type=submit]');
+    if (!v('nom') || !v('tel')) { done.innerHTML = 'Indiquez au moins votre nom et votre téléphone pour que nous puissions vous rappeler.'; return; }
+    const btn = f.querySelector('button');
     btn.disabled = true; btn.textContent = 'Envoi en cours...';
     try {
       const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } });
       if (!r.ok) throw new Error('envoi');
       done.innerHTML = '<b>Merci, votre demande est bien envoyée !</b><br>Nous vous recontactons très vite, en dehors des heures de service.';
-      f.reset();
-      btn.textContent = 'Demande envoyée';
+      f.reset(); btn.textContent = 'Demande envoyée';
     } catch (err) {
       const txt = `Bonjour Voxa AL, je suis ${v('nom') || '-'} du restaurant ${v('resto') || '-'}. Intéressé par : ${v('besoin')}. Joignable ${v('quand').toLowerCase()} au ${v('tel') || '-'}. ${v('msg')}`;
       const sms = 'sms:+33684419652?&body=' + encodeURIComponent(txt);
-      const mail = 'mailto:voxa.al.contact@gmail.com?subject=' + encodeURIComponent('Démo agent vocal') + '&body=' + encodeURIComponent(txt);
-      done.innerHTML = `L'envoi n'a pas fonctionné. Envoyez-nous ce message par SMS au <b>06 84 41 96 52</b> ou par mail à <b>voxa.al.contact@gmail.com</b> :<br><br>${esc(txt)}<br><br><a class="btn red" href="${sms}" style="min-height:44px">Envoyer par SMS</a> <a class="btn" href="${mail}" style="min-height:44px">Par mail</a>`;
+      const mail = 'mailto:voxa.al.contact@gmail.com?subject=' + encodeURIComponent('Demande de démo') + '&body=' + encodeURIComponent(txt);
+      done.innerHTML = `L'envoi n'a pas fonctionné. Envoyez-nous ce message par SMS au <b>06 84 41 96 52</b> ou par mail à <b>voxa.al.contact@gmail.com</b> :<br><br>${esc(txt)}<br><br><a class="btn tomato" href="${sms}">Envoyer par SMS</a> <a class="btn" href="${mail}">Par mail</a>`;
       btn.disabled = false; btn.textContent = 'Envoyer ma demande';
     }
   });
