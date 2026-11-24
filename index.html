@@ -317,7 +317,8 @@ footer b{color:#fff}
         <small>Réponse le jour même · Tourcoing, Roubaix, Lille et alentours</small>
       </div>
     </div>
-    <form id="f" novalidate>
+    <form id="f" action="https://formspree.io/f/xljbokdr" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Nouvelle demande de démo Voxa AL">
       <h3>Ou laissez vos coordonnées</h3>
       <div class="row">
         <label for="nom">Votre nom<input id="nom" name="nom" autocomplete="name"></label>
@@ -402,19 +403,30 @@ footer b{color:#fff}
   }));
 
   const f = $('f'), done = $('done');
-  f.addEventListener('submit', e => {
+  f.addEventListener('submit', async e => {
     e.preventDefault();
     const v = id => $(id).value.trim();
-    const txt = `Bonjour Voxa AL, je suis ${v('nom') || '-'} du restaurant ${v('resto') || '-'}. Intéressé par : ${v('besoin')}. Joignable ${v('quand').toLowerCase()} au ${v('tel') || '-'}. ${v('msg')}`;
     const esc = x => x.replace(/[<>&]/g, c => ({'<': '&lt;', '>': '&gt;', '&': '&amp;'}[c]));
-    const sms = 'sms:+33684419652?&body=' + encodeURIComponent(txt);
-    const mail = 'mailto:voxa.al.contact@gmail.com?subject=' + encodeURIComponent('Démo agent vocal') + '&body=' + encodeURIComponent(txt);
     done.style.display = 'block';
-    done.innerHTML = `Dernière étape : envoyez ce message par SMS au <b>06 84 41 96 52</b> ou par mail à <b>voxa.al.contact@gmail.com</b>.<br><br>${esc(txt)}<br><br><a class="btn red" href="${sms}" style="min-height:44px">Envoyer par SMS</a> <a class="btn" href="${mail}" style="min-height:44px">Par mail</a> <button type="button" class="btn" id="cp" style="min-height:44px">Copier</button>`;
-    $('cp').addEventListener('click', async ev => {
-      try { await navigator.clipboard.writeText(txt); ev.target.textContent = 'Copié'; }
-      catch (err) { ev.target.textContent = 'Sélectionnez le texte'; }
-    });
+    if (!v('tel') && !v('nom')) {
+      done.innerHTML = 'Indiquez au moins votre nom et votre téléphone pour que nous puissions vous rappeler.';
+      return;
+    }
+    const btn = f.querySelector('button[type=submit]');
+    btn.disabled = true; btn.textContent = 'Envoi en cours...';
+    try {
+      const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } });
+      if (!r.ok) throw new Error('envoi');
+      done.innerHTML = '<b>Merci, votre demande est bien envoyée !</b><br>Nous vous recontactons très vite, en dehors des heures de service.';
+      f.reset();
+      btn.textContent = 'Demande envoyée';
+    } catch (err) {
+      const txt = `Bonjour Voxa AL, je suis ${v('nom') || '-'} du restaurant ${v('resto') || '-'}. Intéressé par : ${v('besoin')}. Joignable ${v('quand').toLowerCase()} au ${v('tel') || '-'}. ${v('msg')}`;
+      const sms = 'sms:+33684419652?&body=' + encodeURIComponent(txt);
+      const mail = 'mailto:voxa.al.contact@gmail.com?subject=' + encodeURIComponent('Démo agent vocal') + '&body=' + encodeURIComponent(txt);
+      done.innerHTML = `L'envoi n'a pas fonctionné. Envoyez-nous ce message par SMS au <b>06 84 41 96 52</b> ou par mail à <b>voxa.al.contact@gmail.com</b> :<br><br>${esc(txt)}<br><br><a class="btn red" href="${sms}" style="min-height:44px">Envoyer par SMS</a> <a class="btn" href="${mail}" style="min-height:44px">Par mail</a>`;
+      btn.disabled = false; btn.textContent = 'Envoyer ma demande';
+    }
   });
 }
 </script>
