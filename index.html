@@ -300,7 +300,7 @@ footer b{color:#fff}
       <details><summary>Quelle formule choisir ?</summary><p>Essentiel si vous voulez surtout que quelqu'un réponde et prenne les messages. Pro si vous prenez des réservations par téléphone : c'est la formule la plus choisie. Premium si vous recevez beaucoup de touristes ou de clients belges, et si vous voulez des SMS de confirmation et un bilan chaque mois.</p></details>
       <details><summary>Et si je dépasse mes minutes ?</summary><p>Chaque minute en plus est facturée 0,25 €. Un appel de réservation dure environ une minute : 400 minutes, c'est déjà plusieurs centaines d'appels.</p></details>
       <details><summary>Je peux arrêter quand je veux ?</summary><p>Oui. Après les 3 premiers mois de l'offre de lancement, chaque formule est sans engagement et s'arrête quand vous voulez. Et pendant les 14 premiers jours, vous êtes remboursé si l'agent ne vous convient pas.</p></details>
-      <details><summary>Qui êtes-vous ?</summary><p>Je m'appelle Airone, je suis basé à Tourcoing. Je crée et je gère moi-même chaque agent, et je me déplace dans toute la métropole lilloise. Vous avez un interlocuteur direct, pas un centre d'appels.</p></details>
+      <details><summary>Qui êtes-vous ?</summary><p>Voxa AL est une jeune entreprise basée à Tourcoing. Nous créons et gérons nous-mêmes chaque agent, et nous nous déplaçons dans toute la métropole lilloise. Vous avez un interlocuteur direct, pas un centre d'appels.</p></details>
     </div>
   </div>
 </section>
@@ -347,7 +347,7 @@ footer b{color:#fff}
 <footer class="band" style="padding-block:28px">
   <div class="wrap">
     <p><b>Voxa AL</b> · Agents vocaux IA et vidéos pour restaurants · Tourcoing</p>
-    <p>Airone Parez, entrepreneur individuel · SIRET en cours d'attribution · TVA non applicable, art. 293 B du CGI</p>
+    <p>Mentions légales : éditeur du site Airone Parez EI · SIRET en cours d'attribution · TVA non applicable, art. 293 B du CGI</p>
   </div>
 </footer>
 
@@ -405,7 +405,7 @@ footer b{color:#fff}
   f.addEventListener('submit', e => {
     e.preventDefault();
     const v = id => $(id).value.trim();
-    const txt = `Bonjour Airone, je suis ${v('nom') || '-'} du restaurant ${v('resto') || '-'}. Intéressé par : ${v('besoin')}. Joignable ${v('quand').toLowerCase()} au ${v('tel') || '-'}. ${v('msg')}`;
+    const txt = `Bonjour Voxa AL, je suis ${v('nom') || '-'} du restaurant ${v('resto') || '-'}. Intéressé par : ${v('besoin')}. Joignable ${v('quand').toLowerCase()} au ${v('tel') || '-'}. ${v('msg')}`;
     const esc = x => x.replace(/[<>&]/g, c => ({'<': '&lt;', '>': '&gt;', '&': '&amp;'}[c]));
     const sms = 'sms:+33684419652?&body=' + encodeURIComponent(txt);
     const mail = 'mailto:voxa.al.contact@gmail.com?subject=' + encodeURIComponent('Démo agent vocal') + '&body=' + encodeURIComponent(txt);
